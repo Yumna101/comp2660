@@ -1,7 +1,7 @@
 INCLUDE Irvine32.inc       ; Irvine32 macros and procedure prototypes
 INCLUDELIB Irvine32.lib    ; Link with Irvine32 library
 
-.data                      ; -------- Data segment --------
+.data                      
 ; Use descriptive variable names to avoid parsing ambiguity
 varA SDWORD -543210        ; 32-bit signed integer (initialized)
 varB SWORD  -3210          ; 16-bit signed integer (initialized)
@@ -10,6 +10,7 @@ varD SBYTE  ?              ; 8-bit signed integer  (input from user)
 varZ SDWORD ?              ; 32-bit signed integer (result)
 
 ; Message strings (zero-terminated)
+
 msgPromptC BYTE "What is the value of C? ",0
 msgPromptD BYTE "What is the value of D? ",0
 msgExpr    BYTE "Z = (A - B) - (C - D)",0
@@ -24,12 +25,11 @@ msgBin  BYTE "Z in Binary: ",0
 msgDec  BYTE "Z in Decimal: ",0
 msgHex  BYTE "Z in Hexadecimal: ",0
 
-.code                      ; -------- Code segment --------
+.code                     
 main PROC
 
-    ; ---------------------------
     ; Read user input for varC
-    ; ---------------------------
+
     mov edx, OFFSET msgPromptC   ; EDX = address of prompt for C
     call WriteString             ; print "What is the value of C? "
     call ReadInt                 ; read a signed 32-bit integer into EAX
@@ -43,9 +43,9 @@ main PROC
     mov edx, OFFSET newline
     call WriteString             ; print newline
 
-    ; ---------------------------
+
     ; Read user input for varD (8-bit)
-    ; ---------------------------
+
     mov edx, OFFSET msgPromptD   ; EDX = address of prompt for D
     call WriteString             ; print "What is the value of D? "
     call ReadInt                 ; read a signed 32-bit integer into EAX
@@ -61,17 +61,16 @@ main PROC
     mov edx, OFFSET newline
     call WriteString             ; print newline
 
-    ; ---------------------------
+
     ; Display the expression heading
-    ; ---------------------------
+
     mov edx, OFFSET msgExpr
     call WriteString
     mov edx, OFFSET newline
     call WriteString
 
-    ; ---------------------------
     ; Display all variables A, B, C, D (each on its own line)
-    ; ---------------------------
+
     ; Display A
     mov edx, OFFSET msgA
     call WriteString
@@ -105,9 +104,9 @@ main PROC
     mov edx, OFFSET newline
     call WriteString
 
-    ; ---------------------------
+
     ; Compute Z = (A - B) - (C - D)
-    ; ---------------------------
+
     mov eax, varA           ; EAX = varA
     movsx ebx, varB         ; EBX = sign-extended varB (16-bit -> 32-bit)
     sub eax, ebx            ; EAX = A - B
@@ -119,9 +118,9 @@ main PROC
     sub eax, ecx            ; EAX = (A - B) - (C - D)
     mov varZ, eax           ; store result in varZ
 
-    ; ---------------------------
+
     ; Display Z in Binary, Decimal, Hex
-    ; ---------------------------
+
     mov edx, OFFSET msgBin
     call WriteString
     mov eax, varZ
