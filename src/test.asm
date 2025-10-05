@@ -1,11 +1,3 @@
-; =============================================================
-; COMP-2660 – Assignment #1 – Fall 2025
-; Cleaned & commented version
-; This program computes Z = (A - B) - (C - D)
-; It initializes A and B, reads C and D from the user,
-; displays all variables, and prints Z in binary, decimal, and hex.
-; =============================================================
-
 INCLUDE Irvine32.inc       ; Irvine32 macros and procedure prototypes
 INCLUDELIB Irvine32.lib    ; Link with Irvine32 library
 
